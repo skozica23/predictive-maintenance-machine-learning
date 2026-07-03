@@ -1,3 +1,2 @@
-echo ".venv/" >> .gitignore
 echo "__pycache__/" >> .gitignore
 ecgo ".ipynb_checkpoints/" >> .gitignore
