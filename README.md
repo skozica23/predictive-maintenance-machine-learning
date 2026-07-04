@@ -19,7 +19,7 @@ The dataset contains 10,000 operational data points from manufacturing machines,
 * `Machine failure`: The target label (binary: 0 for normal operation, 1 for imminent failure). *Note: The data exhibits a severe class imbalance, with failures accounting for only ~3.39% of the dataset.*
 
 ## 💻 Environment & Setup
-The project is built using a structured framework and a localized dependency management system to ensure 100% reproducibility across different machines.
+The project is built as a reproducible Jupyter Notebook workflow with a small set of core Python data science dependencies.
 
 ### Prerequisites & Installation
 * **Python Version:** 3.10+
@@ -35,13 +35,15 @@ pip install -r requirements.txt
 ```text
 ├── data/
 │   └── ai4i2020.csv                         # Raw industrial telemetry data
+├── notebooks/
+│   └── predictive-maintenance.ipynb         # Core end-to-end analytical notebook
 ├── plots/
-│   ├── 01_feature_importance.png            # Feature weightings from Random Forest
-│   ├── 04_model_comparison.png              # Static benchmark chart for GitHub preview
-│   └── 04_model_performance_comparison.html # Interactive presentation dashboard
+│   ├── 01_distribution_of_machine_failures.png
+│   ├── 02_correlation_matrix.png
+│   ├── 03_feature_importance_optimized_rf.png
+│   └── 04_model_performance_comparison.html
 ├── .gitignore                               # Standard rules ignoring .venv and cache
-├── requirements.txt                         # Exact python package dependencies file
-└── predictive-maintenance.ipynb             # Core end-to-end analytical notebook
+├── requirements.txt                         # Core Python dependencies
 ```
 
 ## 🧠 Model Evolution & Comparative Analysis
@@ -51,12 +53,12 @@ To tackle the extreme class imbalance, models were evaluated strictly using **Pr
 | :--- | :---: | :---: | :---: | :--- |
 | **Logistic Regression** *(Linear Baseline)* | 0.14 | 0.82 | 0.24 | Baseline |
 | **Decision Tree** *(Non-linear individual)* | 0.31 | 0.87 | 0.46 | Intermediate |
-| **Optimized Random Forest** *(GridSearchCV)* | **0.50** | **0.79** | **0.62** | **Production Ready** |
+| **Optimized Random Forest** *(GridSearchCV)* | **0.50** | **0.79** | **0.62** | **Best Candidate** |
 
 ### Key Findings:
 * **The Baseline Failure:** Logistic Regression struggled significantly with high false-positive rates (Precision of 14%), which in a real factory would trigger endless unnecessary maintenance checks.
-* **The Ensemble Triumph:** Transitioning to an ensemble architecture (**Random Forest**) combined with hyperparameter tuning via `GridSearchCV` established a highly robust model. It successfully captures **79% of all machine failures** while cutting false-alarm deployment costs in half (boosting Precision to **50%**), resulting in a dominant **F1-score of 0.62**.
+* **The Ensemble Improvement:** Transitioning to an ensemble architecture (**Random Forest**) combined with hyperparameter tuning via `GridSearchCV` produced the strongest model in this experiment. It successfully captures **79% of all machine failures** while cutting false-alarm deployment costs in half (boosting Precision to **50%**), resulting in the best observed **F1-score of 0.62**.
 
 ## 🎯 Key Conclusions
 * **Physical Realism:** Feature importance evaluation confirmed that the model's decisions are highly rooted in mechanical laws, relying primarily on `Torque`, `Rotational speed`, and `Tool wear` to spot failures.
-* **Operational Impact:** Deploying the Optimized Random Forest model allows a manufacturing plant to prevent 4 out of 5 catastrophic machine breakdowns while ensuring maintenance teams are only deployed on valid, high-probability alerts.
+* **Operational Impact:** The Optimized Random Forest model could help a manufacturing plant detect roughly 4 out of 5 failure cases while reducing the number of unnecessary maintenance alerts compared with the baseline model.
