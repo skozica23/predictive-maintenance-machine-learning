@@ -1,5 +1,7 @@
 # Predictive Maintenance Using Machine Learning
 
+Polish version: [README_PL.md](README_PL.md)
+
 ## 👥 Project Team
 * **Szymon Kozica**
 
